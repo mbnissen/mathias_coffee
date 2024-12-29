@@ -61,12 +61,10 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
       <.table id="coffees" rows={@streams.coffees}>
         <:col :let={{_id, coffee}}>
           <span>{coffee.variety}</span> <br />
-          <span><.flag region={coffee.region} /></span> • <span>{coffee.process}</span>
+          <span><.flag region={coffee.region} /></span> <br />
+          <span>{coffee.process}</span>
         </:col>
         <:action :let={{_id, coffee}}>
-          <div class="sr-only">
-            <.link navigate={~p"/admin/coffees/#{coffee}"}>Show</.link>
-          </div>
           <.link patch={~p"/admin/coffees/#{coffee}/edit"}>Edit</.link>
         </:action>
         <:action :let={{id, coffee}}>
