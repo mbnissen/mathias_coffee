@@ -3,8 +3,6 @@ defmodule MathiasCoffeeWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    # Region	Variety	Process	Price (100g)*
-
     coffees = [
       %{
         region: "Colombia",
@@ -62,13 +60,6 @@ defmodule MathiasCoffeeWeb.PageLive do
         process: "Dry Fermentation Washed",
         price: 55
       },
-      # %{
-      #  region: "Kenya",
-      #  farm: "Kii",
-      #  variety: "SL28 & SL34",
-      #  process: "Washed",
-      #  price: "Sold out"
-      # },
       %{
         region: "Kenya",
         farm: "Thimu",
