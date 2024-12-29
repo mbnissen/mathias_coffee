@@ -1,0 +1,44 @@
+<.header>
+  Listing Coffees
+  <:actions>
+    <.link patch={~p"/admin/coffees/new"}>
+      <.button>New Coffee</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="coffees"
+  rows={@streams.coffees}
+  row_click={fn {_id, coffee} -> JS.navigate(~p"/admin/coffees/#{coffee}") end}
+>
+  <:col :let={{_id, coffee}} label="Variety">{coffee.variety}</:col>
+  <:col :let={{_id, coffee}} label="Region">{coffee.region}</:col>
+  <:col :let={{_id, coffee}} label="Process">{coffee.process}</:col>
+  <:col :let={{_id, coffee}} label="Price">{coffee.price}</:col>
+  <:action :let={{_id, coffee}}>
+    <div class="sr-only">
+      <.link navigate={~p"/admin/coffees/#{coffee}"}>Show</.link>
+    </div>
+    <.link patch={~p"/admin/coffees/#{coffee}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, coffee}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: coffee.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="coffee-modal" show on_cancel={JS.patch(~p"/admin")}>
+  <.live_component
+    module={MathiasCoffeeWeb.CoffeeLive.FormComponent}
+    id={@coffee.id || :new}
+    title={@page_title}
+    action={@live_action}
+    coffee={@coffee}
+    patch={~p"/admin"}
+  />
+</.modal>

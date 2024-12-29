@@ -29,7 +29,12 @@ defmodule MathiasCoffeeWeb.Router do
   scope "/admin", MathiasCoffeeWeb do
     pipe_through [:browser, :admin]
 
-    live "/", AdminLive
+    live "/", CoffeeLive.Index, :index
+    live "/coffees/new", CoffeeLive.Index, :new
+    live "/coffees/:id/edit", CoffeeLive.Index, :edit
+
+    live "/coffees/:id", CoffeeLive.Show, :show
+    live "/coffees/:id/show/edit", CoffeeLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
