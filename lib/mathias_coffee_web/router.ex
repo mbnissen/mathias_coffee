@@ -11,9 +11,9 @@ defmodule MathiasCoffeeWeb.Router do
   end
 
   pipeline :admin do
-    if Mix.env() == :prod do
-      plug BasicAuth, Application.fetch_env!(:mathias_coffee, BasicAuth)
-    end
+    # if Mix.env() == :prod do
+    plug MathiasCoffeeWeb.Plugs.BasicAuth
+    # end
   end
 
   pipeline :api do

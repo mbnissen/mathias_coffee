@@ -1,29 +1,38 @@
-defmodule BasicAuth do
+defmodule MathiasCoffeeWeb.Plugs.BasicAuth do
   import Plug.Conn
-  @realm "Basic realm=\"My Admin\""
 
   def init(opts), do: opts
 
-  def call(conn, correct_auth) do
+  def call(conn, _opts) do
+    config = Application.get_env(:mathias_coffee, BasicAuth, %{})
+    username = config[:username] || "default_user"
+    password = config[:password] || "default_pass"
+
     case get_req_header(conn, "authorization") do
-      ["Basic " <> attempted_auth] -> verify(conn, attempted_auth, correct_auth)
-      _ -> unauthorized(conn)
+      ["Basic " <> encoded] ->
+        case Base.decode64(encoded) do
+          {:ok, decoded} ->
+            case String.split(decoded, ":", parts: 2) do
+              [^username, ^password] ->
+                conn
+
+              _ ->
+                unauthorized_response(conn)
+            end
+
+          _ ->
+            unauthorized_response(conn)
+        end
+
+      _ ->
+        unauthorized_response(conn)
     end
   end
 
-  defp verify(conn, attempted_auth, username: username, password: password) do
-    case encode(username, password) do
-      ^attempted_auth -> conn
-      _ -> unauthorized(conn)
-    end
-  end
-
-  defp encode(username, password), do: Base.encode64(username <> ":" <> password)
-
-  defp unauthorized(conn) do
+  defp unauthorized_response(conn) do
     conn
-    |> put_resp_header("www-authenticate", @realm)
-    |> send_resp(401, "unauthorized")
+    |> put_resp_header("www-authenticate", "Basic realm=\"Restricted Area\"")
+    |> send_resp(401, "Unauthorized")
     |> halt()
   end
 end
