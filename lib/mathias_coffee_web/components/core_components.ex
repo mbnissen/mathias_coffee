@@ -18,6 +18,36 @@ defmodule MathiasCoffeeWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
 
+  def flag(assigns) do
+    ~H"""
+    <span>{flag_emoji(assigns.region)} {assigns.region}</span>
+    """
+  end
+
+  defp flag_emoji(country) do
+    case country do
+      "Colombia" -> "🇨🇴"
+      "Costa Rica" -> "🇨🇷"
+      "Guatemala" -> "🇬🇹"
+      "Ethiopia" -> "🇪🇹"
+      "Kenya" -> "🇰🇪"
+      "Brazil" -> "🇧🇷"
+      "Honduras" -> "🇭🇳"
+      "Vietnam" -> "🇻🇳"
+      "Peru" -> "🇵🇪"
+      "Mexico" -> "🇲🇽"
+      "Indonesia" -> "🇮🇩"
+      "Uganda" -> "🇺🇬"
+      "India" -> "🇮🇳"
+      "Tanzania" -> "🇹🇿"
+      "Rwanda" -> "🇷🇼"
+      "El Salvador" -> "🇸🇻"
+      "Nicaragua" -> "🇳🇮"
+      "Panama" -> "🇵🇦"
+      _ -> ""
+    end
+  end
+
   @doc """
   Renders a modal.
 
@@ -156,8 +186,7 @@ defmodule MathiasCoffeeWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+        Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
       <.flash

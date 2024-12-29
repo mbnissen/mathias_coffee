@@ -8,30 +8,6 @@ defmodule MathiasCoffeeWeb.PageLive do
     {:ok, stream(socket, :coffees, Inventory.list_coffees())}
   end
 
-  defp flag(country) do
-    case country do
-      "Colombia" -> "🇨🇴"
-      "Costa Rica" -> "🇨🇷"
-      "Guatemala" -> "🇬🇹"
-      "Ethiopia" -> "🇪🇹"
-      "Kenya" -> "🇰🇪"
-      "Brazil" -> "🇧🇷"
-      "Honduras" -> "🇭🇳"
-      "Vietnam" -> "🇻🇳"
-      "Peru" -> "🇵🇪"
-      "Mexico" -> "🇲🇽"
-      "Indonesia" -> "🇮🇩"
-      "Uganda" -> "🇺🇬"
-      "India" -> "🇮🇳"
-      "Tanzania" -> "🇹🇿"
-      "Rwanda" -> "🇷🇼"
-      "El Salvador" -> "🇸🇻"
-      "Nicaragua" -> "🇳🇮"
-      "Panama" -> "🇵🇦"
-      _ -> ""
-    end
-  end
-
   @impl true
   def render(assigns) do
     ~H"""
@@ -57,7 +33,7 @@ defmodule MathiasCoffeeWeb.PageLive do
                   {coffee.variety}
                 </h2>
                 <p class="mt-1 text-zinc-500">
-                  <span>{flag(coffee.region)} {coffee.region}</span> • <span>{coffee.process}</span>
+                  <span><.flag region={coffee.region} /></span> • <span>{coffee.process}</span>
                 </p>
                 <p class="mt-4 text-lg font-bold text-zinc-600">{coffee.price} kr.</p>
               </div>

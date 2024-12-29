@@ -59,10 +59,10 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
       </.header>
 
       <.table id="coffees" rows={@streams.coffees}>
-        <:col :let={{_id, coffee}} label="Variety">{coffee.variety}</:col>
-        <:col :let={{_id, coffee}} label="Region">{coffee.region}</:col>
-        <:col :let={{_id, coffee}} label="Process">{coffee.process}</:col>
-        <:col :let={{_id, coffee}} label="Price">{coffee.price}</:col>
+        <:col :let={{_id, coffee}}>
+          <span>{coffee.variety}</span> <br />
+          <span><.flag region={coffee.region} /></span> • <span>{coffee.process}</span>
+        </:col>
         <:action :let={{_id, coffee}}>
           <div class="sr-only">
             <.link navigate={~p"/admin/coffees/#{coffee}"}>Show</.link>
