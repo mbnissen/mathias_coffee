@@ -88,9 +88,11 @@ defmodule MathiasCoffeeWeb.PageLive do
     ~H"""
     <section id="menu">
       <div class="container mx-auto px-6">
-        <h3 class="text-6xl font-bold text-center">Mathias Coffee ☕</h3>
-
-        <div class="pt-6">
+        <h3 class="text-4xl font-bold text-center">Mathias Coffee</h3>
+        <p class="text-6xl text-center">
+          ☕️
+        </p>
+        <div class="pt-3">
           <div class="text-center">
             <p>
               All prices are per 100 grams.
