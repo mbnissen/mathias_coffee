@@ -30,6 +30,10 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
+  config :mathias_coffee, BasicAuth,
+    username: System.fetch_env!("ADMIN_USERNAME"),
+    password: System.fetch_env!("ADMIN_PASSWORD")
+
   config :mathias_coffee, MathiasCoffee.Repo,
     # ssl: true,
     url: database_url,

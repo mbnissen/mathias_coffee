@@ -11,6 +11,8 @@ config :mathias_coffee,
   ecto_repos: [MathiasCoffee.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
+config :mathias_coffee, BasicAuth, username: "admin", password: "secret"
+
 # Configures the endpoint
 config :mathias_coffee, MathiasCoffeeWeb.Endpoint,
   url: [host: "localhost"],

@@ -10,6 +10,12 @@ defmodule MathiasCoffeeWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin do
+    if Mix.env() == :prod do
+      plug BasicAuth, Application.fetch_env!(:mathias_coffee, BasicAuth)
+    end
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -18,6 +24,12 @@ defmodule MathiasCoffeeWeb.Router do
     pipe_through :browser
 
     live "/", PageLive
+  end
+
+  scope "/admin", MathiasCoffeeWeb do
+    pipe_through [:browser, :admin]
+
+    live "/", AdminLive
   end
 
   # Other scopes may use custom stacks.
