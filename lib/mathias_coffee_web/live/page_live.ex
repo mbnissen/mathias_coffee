@@ -8,26 +8,26 @@ defmodule MathiasCoffeeWeb.PageLive do
     {:ok, stream(socket, :coffees, Inventory.list_coffees())}
   end
 
-  defp flag(region) do
-    case region do
-      "Colombia" -> "🇨"
-      "Costa Rica" -> "🇨"
-      "Guatemala" -> "🇬"
-      "Ethiopia" -> "🇪"
-      "Kenya" -> "🇰"
-      "Brazil" -> "🇧"
-      "Honduras" -> "🇭"
-      "Vietnam" -> "🇻"
-      "Peru" -> "🇵"
-      "Mexico" -> "🇲"
-      "Indonesia" -> "🇮"
-      "Uganda" -> "🇺"
-      "India" -> "🇮"
-      "Tanzania" -> "🇹"
-      "Rwanda" -> "🇷"
-      "El Salvador" -> "🇸"
-      "Nicaragua" -> "🇳"
-      "Panama" -> "🇵"
+  defp flag(country) do
+    case country do
+      "Colombia" -> "🇨🇴"
+      "Costa Rica" -> "🇨🇷"
+      "Guatemala" -> "🇬🇹"
+      "Ethiopia" -> "🇪🇹"
+      "Kenya" -> "🇰🇪"
+      "Brazil" -> "🇧🇷"
+      "Honduras" -> "🇭🇳"
+      "Vietnam" -> "🇻🇳"
+      "Peru" -> "🇵🇪"
+      "Mexico" -> "🇲🇽"
+      "Indonesia" -> "🇮🇩"
+      "Uganda" -> "🇺🇬"
+      "India" -> "🇮🇳"
+      "Tanzania" -> "🇹🇿"
+      "Rwanda" -> "🇷🇼"
+      "El Salvador" -> "🇸🇻"
+      "Nicaragua" -> "🇳🇮"
+      "Panama" -> "🇵🇦"
       _ -> ""
     end
   end
