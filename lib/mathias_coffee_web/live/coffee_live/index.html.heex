@@ -32,7 +32,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="coffee-modal" show on_cancel={JS.patch(~p"/admin")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="coffee-modal"
+  show
+  on_cancel={JS.patch(~p"/admin")}
+>
   <.live_component
     module={MathiasCoffeeWeb.CoffeeLive.FormComponent}
     id={@coffee.id || :new}
