@@ -2,10 +2,14 @@ defmodule MathiasCoffeeWeb.PageLive do
   use MathiasCoffeeWeb, :live_view
 
   alias MathiasCoffee.Inventory
+  alias MathiasCoffeeWeb.ShoppingCart
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, stream(socket, :coffees, Inventory.list_coffees())}
+  def mount(_params, session, socket) do
+    {:ok,
+     socket
+     |> assign(:coffees, Inventory.list_coffees())
+     |> assign(:token, session["_csrf_token"])}
   end
 
   @impl true
@@ -28,7 +32,7 @@ defmodule MathiasCoffeeWeb.PageLive do
             </p>
           </div>
           <div>
-            <%= for {_id, coffee} <- @streams.coffees do %>
+            <%= for coffee <- @coffees do %>
               <div class="mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-4">
                 <div class="p-6">
                   <h2 class="text-xl font-bold text-zinc-600">

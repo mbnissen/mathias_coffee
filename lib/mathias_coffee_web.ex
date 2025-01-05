@@ -51,7 +51,7 @@ defmodule MathiasCoffeeWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {MathiasCoffeeWeb.Layouts, :app}
+        layout: {MathiasCoffeeWeb.Layouts, :live}
 
       unquote(html_helpers())
     end

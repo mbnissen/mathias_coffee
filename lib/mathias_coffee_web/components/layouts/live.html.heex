@@ -1,0 +1,35 @@
+<nav class="bg-lime-900">
+  <div class="max-w-screen-xl flex justify-between mx-auto p-4">
+    <a href={~p"/"} class="flex items-center space-x-3">
+      <img src={~p"/images/logo.png"} class="h-8" alt="Logo" />
+      <span class="self-center text-2xl whitespace-nowrap dark:text-white">
+        Ketsai Coffee
+      </span>
+    </a>
+    <div class="w-auto pt-[6px]">
+      <ul class="flex flex-col font-medium border-gray-100 rounded-lg">
+        <li>
+          <a
+            href={~p"/checkout"}
+            class="block px-3 text-white rounded bg-transparent"
+            aria-current="page"
+          >
+          <%= length(@cart_items) %> items
+          <.icon name="hero-shopping-cart" class="ml-2 h-6 w-6" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<body class="bg-lime-700 bg-opacity-75 text-slate-100 font-montserrat">
+  <main class="px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <%= for item <- @cart_items do %>
+        <p>{item.id} - {item.count}</p>
+      <% end %>
+      <.flash_group flash={@flash} />
+      {@inner_content}
+    </div>
+  </main>
+</body>

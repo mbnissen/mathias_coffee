@@ -17,7 +17,8 @@ defmodule MathiasCoffee.Application do
       # Start a worker by calling: MathiasCoffee.Worker.start_link(arg)
       # {MathiasCoffee.Worker, arg},
       # Start to serve requests, typically the last entry
-      MathiasCoffeeWeb.Endpoint
+      MathiasCoffeeWeb.Endpoint,
+      {Cachex, [:my_cache, []]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
