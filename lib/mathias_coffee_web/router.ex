@@ -24,6 +24,7 @@ defmodule MathiasCoffeeWeb.Router do
     pipe_through :browser
 
     live "/", PageLive
+    live "/checkout", CheckoutLive
   end
 
   scope "/admin", MathiasCoffeeWeb do
