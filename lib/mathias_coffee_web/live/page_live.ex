@@ -2,7 +2,6 @@ defmodule MathiasCoffeeWeb.PageLive do
   use MathiasCoffeeWeb, :live_view
 
   alias MathiasCoffee.Inventory
-  alias MathiasCoffeeWeb.ShoppingCart
 
   @impl true
   def mount(_params, session, socket) do
@@ -13,7 +12,8 @@ defmodule MathiasCoffeeWeb.PageLive do
   end
 
   @impl true
-  def handle_event("add_to_cart", %{"id" => id}, socket) do
+  def handle_event("add_to_cart", _params, socket) do
+    # Handled in Nav
     {:noreply, socket}
   end
 

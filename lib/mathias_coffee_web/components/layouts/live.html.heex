@@ -25,9 +25,6 @@
 <body class="bg-lime-700 bg-opacity-75 text-slate-100 font-montserrat">
   <main class="px-4 py-10 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl">
-      <%= for item <- @cart_items do %>
-        <p>{item.id} - {item.count}</p>
-      <% end %>
       <.flash_group flash={@flash} />
       {@inner_content}
     </div>

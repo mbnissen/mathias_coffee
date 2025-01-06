@@ -1,8 +1,6 @@
 defmodule MathiasCoffeeWeb.CheckoutLive do
   use MathiasCoffeeWeb, :live_view
 
-  alias MathiasCoffeeWeb.ShoppingCart
-
   @phone_number "4529908631"
 
   @text """
@@ -22,6 +20,11 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
 
   @impl true
   def handle_event("checkout", _value, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("empty_cart", _value, socket) do
     {:noreply, socket}
   end
 
@@ -98,6 +101,9 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
                 >
                   <img alt="Chat on WhatsApp" src={~p"/images/WhatsAppButtonGreenSmall.png"} />
                 </a>
+                <.button phx-click="empty_cart" class="ml-4">
+                  Clear
+                </.button>
               </div>
             </div>
           </div>

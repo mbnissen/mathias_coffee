@@ -5,24 +5,21 @@ defmodule MathiasCoffeeWeb.Nav do
 
   def on_mount(:default, _params, session, socket) do
     ShoppingCart.init(session)
+    cart_items = ShoppingCart.get_items(session)
 
     {:cont,
      socket
-     |> assign_new(:cart_items, fn ->
-       ShoppingCart.get_items(session)
-     end)
-     |> attach_hook(:ping, :handle_event, &handle_event/3)}
+     |> assign(:cart_items, cart_items)
+     |> attach_hook(:add_to_cart, :handle_event, &handle_event/3)}
   end
 
   defp handle_event("add_to_cart", %{"id" => id}, socket) do
-    items =
-      ShoppingCart.increment_item_in_cart(id, socket.assigns.token)
-      |> dbg()
-
-    {:cont, socket |> assign(:items, items)}
+    cart_items = ShoppingCart.increment_item_in_cart(id, socket.assigns.token)
+    {:cont, socket |> assign(:cart_items, cart_items)}
   end
 
-  defp handle_event(_, _, socket) do
-    {:cont, socket}
+  defp handle_event("empty_cart", _, socket) do
+    ShoppingCart.clearCache()
+    {:cont, socket |> assign(:cart_items, [])}
   end
 end
