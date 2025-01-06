@@ -18,6 +18,12 @@ defmodule MathiasCoffeeWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
 
+  def price(assigns) do
+    ~H"""
+    <span>{@amount} kr.</span>
+    """
+  end
+
   def flag(assigns) do
     ~H"""
     <span>{flag_emoji(assigns.region)} {assigns.region}</span>

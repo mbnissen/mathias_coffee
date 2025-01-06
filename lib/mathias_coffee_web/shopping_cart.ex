@@ -3,6 +3,8 @@ defmodule MathiasCoffeeWeb.ShoppingCart do
     items: []
   }
 
+  alias MathiasCoffee.Inventory
+
   def init(session) do
     {_, cache} = Cachex.get(:my_cache, session["_csrf_token"])
 
@@ -60,9 +62,12 @@ defmodule MathiasCoffeeWeb.ShoppingCart do
         end
       )
 
+    coffee = Inventory.get_coffee!(id)
+    filtered_item
+
     concat_items =
       if Enum.count(filtered_item) === 0 do
-        [%{id: id, count: 0}]
+        [%{id: id, count: 0, coffee: coffee}]
       else
         []
       end
@@ -88,7 +93,7 @@ defmodule MathiasCoffeeWeb.ShoppingCart do
 
     mod_items =
       Enum.filter(cache.items, fn item ->
-        item.id != String.to_integer(id)
+        item.id != id
       end)
 
     cache = Map.put(cache, :items, mod_items)

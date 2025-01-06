@@ -7,8 +7,7 @@ defmodule MathiasCoffeeWeb.PageLive do
   def mount(_params, session, socket) do
     {:ok,
      socket
-     |> assign(:coffees, Inventory.list_coffees())
-     |> assign(:token, session["_csrf_token"])}
+     |> assign(:coffees, Inventory.list_coffees())}
   end
 
   @impl true
@@ -43,7 +42,9 @@ defmodule MathiasCoffeeWeb.PageLive do
                   </p>
                   <div class="pt-2 flex justify-between">
                     <div>
-                      <p class="text-lg pt-2 font-bold text-zinc-600">{coffee.price} kr.</p>
+                      <p class="text-lg pt-2 font-bold text-zinc-600">
+                        <.price amount={coffee.price} />
+                      </p>
                     </div>
                     <div>
                       <.button class="text-xs" phx-click="add_to_cart" phx-value-id={coffee.id}>
