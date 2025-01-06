@@ -42,8 +42,8 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
 
     """
     Hello Mathias I would like to buy the following coffees:
+     
     #{lines}
-
     Total: #{calculate_total(card_items)} kr..w
     """
     |> URI.encode()
