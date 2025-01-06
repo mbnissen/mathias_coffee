@@ -43,7 +43,7 @@ defmodule MathiasCoffeeWeb.PageLive do
                   <div class="pt-2 flex justify-between">
                     <div>
                       <p class="text-lg pt-2 font-bold text-zinc-600">
-                        <.price amount={coffee.price} />
+                        <.price amount={coffee.price} /> / 100 g.
                       </p>
                     </div>
                     <div>
