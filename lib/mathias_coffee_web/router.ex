@@ -20,10 +20,14 @@ defmodule MathiasCoffeeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", MathiasCoffeeWeb do
-    pipe_through :browser
+  live_session :shopping_cart,
+    on_mount: [MathiasCoffeeWeb.Nav] do
+    scope "/", MathiasCoffeeWeb do
+      pipe_through :browser
 
-    live "/", PageLive
+      live "/", PageLive
+      live "/checkout", CheckoutLive
+    end
   end
 
   scope "/admin", MathiasCoffeeWeb do

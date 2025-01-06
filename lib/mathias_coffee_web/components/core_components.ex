@@ -18,6 +18,12 @@ defmodule MathiasCoffeeWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
 
+  def price(assigns) do
+    ~H"""
+    <span>{@amount} kr.</span>
+    """
+  end
+
   def flag(assigns) do
     ~H"""
     <span>{flag_emoji(assigns.region)} {assigns.region}</span>
@@ -259,8 +265,8 @@ defmodule MathiasCoffeeWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        "phx-submit-loading:opacity-75 rounded-lg border border-zinc-500 py-2 px-3",
+        "text-sm font-semibold leading-6 text-zinc-700 active:text-zinc-400",
         @class
       ]}
       {@rest}
