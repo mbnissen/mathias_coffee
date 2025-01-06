@@ -63,7 +63,6 @@ defmodule MathiasCoffeeWeb.ShoppingCart do
       )
 
     coffee = Inventory.get_coffee!(id)
-    filtered_item
 
     concat_items =
       if Enum.count(filtered_item) === 0 do

@@ -14,7 +14,7 @@
             class="block px-3 text-white rounded bg-transparent"
             aria-current="page"
           >
-          <%= length(@cart_items) %> items
+          <%= Enum.map(@cart_items, & &1.count)|>Enum.sum() %> items
           <.icon name="hero-shopping-cart" class="ml-2 h-6 w-6" />
           </a>
         </li>
