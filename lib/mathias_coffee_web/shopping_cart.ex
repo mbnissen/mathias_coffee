@@ -29,7 +29,7 @@ defmodule MathiasCoffeeWeb.ShoppingCart do
       Enum.map(
         cache.items,
         fn item ->
-          if item.id === String.to_integer(id) do
+          if item.id === id do
             %{item | count: item.count - 1}
           else
             item

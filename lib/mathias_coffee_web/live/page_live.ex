@@ -11,9 +11,16 @@ defmodule MathiasCoffeeWeb.PageLive do
   end
 
   @impl true
-  def handle_event("add_to_cart", _params, socket) do
+  def handle_event(_, _params, socket) do
     # Handled in Nav
     {:noreply, socket}
+  end
+
+  defp get_cart_item_count(id, cart_items) do
+    case Enum.find(cart_items, &(&1.id == id)) do
+      nil -> 0
+      cart_item -> cart_item.count
+    end
   end
 
   @impl true
@@ -46,10 +53,16 @@ defmodule MathiasCoffeeWeb.PageLive do
                         <.price amount={coffee.price} /> / 100 g.
                       </p>
                     </div>
-                    <div>
-                      <.button class="text-xs" phx-click="add_to_cart" phx-value-id={coffee.id}>
-                        Add to cart
-                      </.button>
+                    <div class="flex items-center space-x-2 pt-1">
+                      <div phx-click="decrement_item" phx-value-id={coffee.id}>
+                        <.icon name="hero-minus-circle" class="text-zinc-600 cursor-pointer" />
+                      </div>
+                      <span class="text-zinc-700 w-8 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        {get_cart_item_count(coffee.id, @cart_items)}
+                      </span>
+                      <div phx-click="increment_item" phx-value-id={coffee.id}>
+                        <.icon name="hero-plus-circle" class="text-zinc-600 cursor-pointer" />
+                      </div>
                     </div>
                   </div>
                 </div>
