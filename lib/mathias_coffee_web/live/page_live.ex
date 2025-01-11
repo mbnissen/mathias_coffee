@@ -53,15 +53,23 @@ defmodule MathiasCoffeeWeb.PageLive do
                         <.price amount={coffee.price} /> / 100 g.
                       </p>
                     </div>
-                    <div class="flex items-center space-x-2 pt-1">
-                      <div phx-click="decrement_item" phx-value-id={coffee.id}>
-                        <.icon name="hero-minus-circle" class="text-zinc-600 cursor-pointer" />
+                    <div class="flex items-center space-x-3">
+                      <div
+                        phx-click="remove_from_cart"
+                        phx-value-id={coffee.id}
+                        class="cursor-pointer"
+                      >
+                        <%= if get_cart_item_count(coffee.id, @cart_items) > 0 do %>
+                          <.icon name="hero-trash text-red-500" class="h-5 w-5" />
+                        <% end %>
                       </div>
-                      <span class="text-zinc-700 w-8 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <span class="text-zinc-700 text-center">
                         {get_cart_item_count(coffee.id, @cart_items)}
                       </span>
-                      <div phx-click="increment_item" phx-value-id={coffee.id}>
-                        <.icon name="hero-plus-circle" class="text-zinc-600 cursor-pointer" />
+                      <div phx-click="increment_item" phx-value-id={coffee.id} class="cursor-pointer">
+                        <.button>
+                          Add to cart
+                        </.button>
                       </div>
                     </div>
                   </div>
