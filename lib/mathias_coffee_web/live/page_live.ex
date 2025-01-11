@@ -77,6 +77,13 @@ defmodule MathiasCoffeeWeb.PageLive do
               </div>
             <% end %>
           </div>
+          <div class="text-center mt-6">
+            <.link patch={~p"/checkout"}>
+              <.button class="w-full bg-white">
+                Go to checkout
+              </.button>
+            </.link>
+          </div>
         </div>
       </div>
     </section>
