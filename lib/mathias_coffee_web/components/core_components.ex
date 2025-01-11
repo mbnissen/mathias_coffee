@@ -20,7 +20,7 @@ defmodule MathiasCoffeeWeb.CoreComponents do
 
   def price(assigns) do
     ~H"""
-    <span>{@amount} kr.</span>
+    <span class="ordinal tabular-nums">{@amount} kr.</span>
     """
   end
 

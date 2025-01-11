@@ -55,11 +55,11 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
           <%= for %{coffee: coffee, count: count} <- @cart_items do %>
             <div class="mb-4 border-b pb-4">
               <div class="flex justify-between items-center">
-                <div class="max-w-[220px]">
+                <div class="max-w-[200px]">
                   <h2 class="text font-semibold text-gray-800">{count} x {coffee.variety}</h2>
                   <p class="text-sm text-gray-500">{coffee.region} - {coffee.process}</p>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
                   <div class="text-gray-700 font-semibold">
                     <.price amount={Decimal.mult(coffee.price, count)} />
                   </div>
