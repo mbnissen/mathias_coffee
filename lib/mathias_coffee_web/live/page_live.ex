@@ -27,7 +27,7 @@ defmodule MathiasCoffeeWeb.PageLive do
   def render(assigns) do
     ~H"""
     <section id="menu">
-      <div class="container mx-auto px-6">
+      <div class="container mx-auto px-4">
         <div class="pb-10">
           <div class="text-center">
             <p>
@@ -53,19 +53,19 @@ defmodule MathiasCoffeeWeb.PageLive do
                         <.price amount={coffee.price} /> / 100 g.
                       </p>
                     </div>
-                    <div class="flex items-center space-x-3">
-                      <div
-                        phx-click="remove_from_cart"
-                        phx-value-id={coffee.id}
-                        class="cursor-pointer"
-                      >
-                        <%= if get_cart_item_count(coffee.id, @cart_items) > 0 do %>
+                    <div class="flex items-center space-x-2">
+                      <%= if get_cart_item_count(coffee.id, @cart_items) > 0 do %>
+                        <div
+                          phx-click="remove_from_cart"
+                          phx-value-id={coffee.id}
+                          class="cursor-pointer"
+                        >
                           <.icon name="hero-trash text-red-500" class="h-5 w-5" />
-                        <% end %>
-                      </div>
-                      <span class="text-zinc-700 text-center">
-                        {get_cart_item_count(coffee.id, @cart_items)}
-                      </span>
+                        </div>
+                        <span class="text-zinc-700 text-center">
+                          {get_cart_item_count(coffee.id, @cart_items)}
+                        </span>
+                      <% end %>
                       <div phx-click="increment_item" phx-value-id={coffee.id} class="cursor-pointer">
                         <.button>
                           Add to cart
