@@ -61,27 +61,16 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
                     <p class="text-sm text-gray-500">{coffee.region} - {coffee.process}</p>
                   </div>
                   <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2 pt-1">
-                      <div phx-click="decrement_item" phx-value-id={coffee.id}>
-                        <.icon name="hero-minus-circle" class="text-zinc-600 cursor-pointer" />
-                      </div>
-                      <span class="text-zinc-700 w-8 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        {get_cart_item_count(coffee.id, @cart_items)}
-                      </span>
-                      <div phx-click="increment_item" phx-value-id={coffee.id}>
-                        <.icon name="hero-plus-circle" class="text-zinc-600 cursor-pointer" />
-                      </div>
-                    </div>
-                    <p class="text-gray-800 font-semibold">
+                    <div class="text-gray-700 font-semibold">
                       <.price amount={Decimal.mult(coffee.price, count)} />
-                    </p>
-                    <span
+                    </div>
+                    <div
                       phx-click="remove_from_cart"
                       phx-value-id={coffee.id}
                       class="text-red-500 cursor-pointer"
                     >
                       <.icon name="hero-trash" class="h-6 w-6" />
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
