@@ -40,7 +40,7 @@ defmodule MathiasCoffeeWeb.PageLive do
           <div>
             <%= for coffee <- @coffees do %>
               <div class="mx-auto bg-white rounded-lg shadow-lg overflow-hidden mt-4">
-                <div class="p-6">
+                <div class="p-4">
                   <h2 class="text-xl font-bold text-zinc-600">
                     {coffee.variety}
                   </h2>
@@ -49,7 +49,7 @@ defmodule MathiasCoffeeWeb.PageLive do
                   </p>
                   <div class="pt-2 flex justify-between">
                     <div>
-                      <p class="text-lg pt-2 font-bold text-zinc-600">
+                      <p class="text-lg pt-2 font-semibold text-zinc-600">
                         <.price amount={coffee.price} /> / 100 g.
                       </p>
                     </div>
