@@ -34,8 +34,7 @@ defmodule MathiasCoffeeWeb.Nav do
     {:cont, socket |> assign(:cart_items, [])}
   end
 
-  defp handle_event(event, _, socket) do
-    dbg("Unknown event")
+  defp handle_event(_, _, socket) do
     {:cont, socket}
   end
 end

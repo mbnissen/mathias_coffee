@@ -39,13 +39,6 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
     |> URI.encode()
   end
 
-  defp get_cart_item_count(id, cart_items) do
-    case Enum.find(cart_items, &(&1.id == id)) do
-      nil -> 0
-      cart_item -> cart_item.count
-    end
-  end
-
   @impl true
   def render(assigns) do
     ~H"""
