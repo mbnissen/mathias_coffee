@@ -1,7 +1,7 @@
 defmodule MathiasCoffeeWeb.CheckoutLive do
   use MathiasCoffeeWeb, :live_view
 
-  @phone_number "4529908631"
+  @phone_number "4591828785"
 
   @impl true
   def mount(_params, _session, socket) do
