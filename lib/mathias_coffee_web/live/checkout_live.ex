@@ -53,7 +53,6 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
                   <div class="text-gray-700 font-semibold">
                     <.price amount={Decimal.mult(coffee.price, count)} />
                   </div>
-                  hest
                   <div
                     phx-click="remove_from_cart"
                     phx-value-id={coffee.id}
