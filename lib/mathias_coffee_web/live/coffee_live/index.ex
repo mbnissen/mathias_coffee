@@ -7,6 +7,13 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    try do
+      ThisWillError.really()
+    rescue
+      my_exception ->
+        Sentry.capture_exception(my_exception, stacktrace: __STACKTRACE__)
+    end
+
     {:ok, stream(socket, :coffees, Inventory.list_coffees())}
   end
 
