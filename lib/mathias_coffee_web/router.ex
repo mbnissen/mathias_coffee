@@ -30,19 +30,15 @@ defmodule MathiasCoffeeWeb.Router do
     end
   end
 
-  # TODO use another nav for admin
-  live_session :admin,
-    on_mount: [MathiasCoffeeWeb.Nav] do
-    scope("/admin", MathiasCoffeeWeb) do
-      pipe_through [:browser, :admin]
+  scope("/admin", MathiasCoffeeWeb) do
+    pipe_through [:browser, :admin]
 
-      live "/", CoffeeLive.Index, :index
-      live "/coffees/new", CoffeeLive.Index, :new
-      live "/coffees/:id/edit", CoffeeLive.Index, :edit
+    live "/", CoffeeLive.Index, :index
+    live "/coffees/new", CoffeeLive.Index, :new
+    live "/coffees/:id/edit", CoffeeLive.Index, :edit
 
-      live "/coffees/:id", CoffeeLive.Show, :show
-      live "/coffees/:id/show/edit", CoffeeLive.Show, :edit
-    end
+    live "/coffees/:id", CoffeeLive.Show, :show
+    live "/coffees/:id/show/edit", CoffeeLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
