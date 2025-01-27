@@ -20,6 +20,7 @@ defmodule MathiasCoffeeWeb.ConnCase do
   using do
     quote do
       use MathiasCoffeeWeb, :verified_routes
+
       import MathiasCoffeeWeb.ConnCase
       import Phoenix.ConnTest
       import Plug.Conn
