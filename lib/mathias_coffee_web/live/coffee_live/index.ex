@@ -1,4 +1,5 @@
 defmodule MathiasCoffeeWeb.CoffeeLive.Index do
+  @moduledoc false
   use MathiasCoffeeWeb, :live_view
 
   alias MathiasCoffee.Inventory

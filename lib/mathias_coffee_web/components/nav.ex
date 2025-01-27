@@ -1,4 +1,5 @@
 defmodule MathiasCoffeeWeb.Nav do
+  @moduledoc false
   use MathiasCoffeeWeb, :live_component
 
   alias MathiasCoffeeWeb.ShoppingCart
@@ -16,22 +17,22 @@ defmodule MathiasCoffeeWeb.Nav do
 
   defp handle_event("increment_item", %{"id" => id}, socket) do
     cart_items = ShoppingCart.increment_item_in_cart(id, socket.assigns.token)
-    {:cont, socket |> assign(:cart_items, cart_items)}
+    {:cont, assign(socket, :cart_items, cart_items)}
   end
 
   defp handle_event("decrement_item", %{"id" => id}, socket) do
     cart_items = ShoppingCart.decrement_item_in_cart(id, socket.assigns.token)
-    {:cont, socket |> assign(:cart_items, cart_items)}
+    {:cont, assign(socket, :cart_items, cart_items)}
   end
 
   defp handle_event("remove_from_cart", %{"id" => id}, socket) do
     cart_items = ShoppingCart.delete_item_from_cart(id, socket.assigns.token)
-    {:cont, socket |> assign(:cart_items, cart_items)}
+    {:cont, assign(socket, :cart_items, cart_items)}
   end
 
   defp handle_event("empty_cart", _, socket) do
     ShoppingCart.clearCache()
-    {:cont, socket |> assign(:cart_items, [])}
+    {:cont, assign(socket, :cart_items, [])}
   end
 
   defp handle_event(_, _, socket) do

@@ -1,13 +1,12 @@
 defmodule MathiasCoffeeWeb.PageLive do
+  @moduledoc false
   use MathiasCoffeeWeb, :live_view
 
   alias MathiasCoffee.Inventory
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok,
-     socket
-     |> assign(:coffees, Inventory.list_coffees())}
+    {:ok, assign(socket, :coffees, Inventory.list_coffees())}
   end
 
   @impl true

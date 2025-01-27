@@ -1,4 +1,5 @@
 defmodule MathiasCoffeeWeb.Plugs.BasicAuth do
+  @moduledoc false
   import Plug.Conn
 
   def init(opts), do: opts

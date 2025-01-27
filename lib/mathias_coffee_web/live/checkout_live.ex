@@ -1,13 +1,12 @@
 defmodule MathiasCoffeeWeb.CheckoutLive do
+  @moduledoc false
   use MathiasCoffeeWeb, :live_view
 
   @phone_number "4591828785"
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok,
-     socket
-     |> assign(:phone_number, @phone_number)}
+    {:ok, assign(socket, :phone_number, @phone_number)}
   end
 
   @impl true
@@ -16,8 +15,7 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
   end
 
   defp calculate_total(cart_items) do
-    cart_items
-    |> Enum.reduce(0, fn %{coffee: coffee, count: count}, acc ->
+    Enum.reduce(cart_items, 0, fn %{coffee: coffee, count: count}, acc ->
       Decimal.add(acc, Decimal.mult(coffee.price, count))
     end)
   end
@@ -30,13 +28,12 @@ defmodule MathiasCoffeeWeb.CheckoutLive do
         """
       end)
 
-    """
+    URI.encode("""
     Hello Mathias I would like to buy the following coffees:
      
     #{lines}
     Total: #{calculate_total(card_items)} kr.
-    """
-    |> URI.encode()
+    """)
   end
 
   @impl true

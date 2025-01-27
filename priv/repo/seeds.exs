@@ -10,6 +10,8 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+alias MathiasCoffee.Inventory
+
 coffees = [
   %{
     region: "Colombia",
@@ -75,8 +77,6 @@ coffees = [
     price: 50
   }
 ]
-
-alias MathiasCoffee.Inventory
 
 Enum.each(coffees, fn coffee ->
   Inventory.create_coffee(coffee)

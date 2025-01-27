@@ -1,4 +1,5 @@
 defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
+  @moduledoc false
   use MathiasCoffeeWeb, :live_component
 
   alias MathiasCoffee.Inventory

@@ -1,9 +1,10 @@
 defmodule MathiasCoffeeWeb.ShoppingCart do
+  @moduledoc false
+  alias MathiasCoffee.Inventory
+
   @initial_state %{
     items: []
   }
-
-  alias MathiasCoffee.Inventory
 
   def init(session) do
     {_, cache} = Cachex.get(:my_cache, session["_csrf_token"])

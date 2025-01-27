@@ -4,9 +4,9 @@ defmodule MathiasCoffee.Inventory do
   """
 
   import Ecto.Query, warn: false
-  alias MathiasCoffee.Repo
 
   alias MathiasCoffee.Inventory.Coffee
+  alias MathiasCoffee.Repo
 
   @doc """
   Returns the list of coffees.
