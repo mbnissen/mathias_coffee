@@ -9,4 +9,4 @@ on:
 jobs:
   test:
     name: Test
-    uses: ./.github/workflows/test.yaml
+    uses: .github/workflows/test.yaml

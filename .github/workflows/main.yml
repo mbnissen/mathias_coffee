@@ -8,10 +8,10 @@ on:
 jobs:
   test:
     name: Test
-    uses: ./.github/workflows/test.yaml
+    uses: .github/workflows/test.yaml
     secrets: inherit # This is required for child workflows to use secrets
 
   deploy:
     name: Deploy
-    uses: ./.github/workflows/test.yaml
+    uses: .github/workflows/fly-deploy.yaml
     secrets: inherit # This is required for child workflows to use secrets
