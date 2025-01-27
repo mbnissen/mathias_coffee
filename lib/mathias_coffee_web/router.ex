@@ -11,9 +11,7 @@ defmodule MathiasCoffeeWeb.Router do
   end
 
   pipeline :admin do
-    # if Mix.env() == :prod do
     plug MathiasCoffeeWeb.Plugs.BasicAuth
-    # end
   end
 
   pipeline :api do
@@ -30,15 +28,18 @@ defmodule MathiasCoffeeWeb.Router do
     end
   end
 
-  scope("/admin", MathiasCoffeeWeb) do
-    pipe_through [:browser, :admin]
+  live_session :admin, layout: {MathiasCoffeeWeb.Layouts, :admin} do
+    scope("/admin", MathiasCoffeeWeb) do
+      pipe_through [:browser, :admin]
 
-    live "/", CoffeeLive.Index, :index
-    live "/coffees/new", CoffeeLive.Index, :new
-    live "/coffees/:id/edit", CoffeeLive.Index, :edit
+      live "/", CoffeeLive.Index, :index
 
-    live "/coffees/:id", CoffeeLive.Show, :show
-    live "/coffees/:id/show/edit", CoffeeLive.Show, :edit
+      live "/coffees/new", CoffeeLive.Index, :new
+      live "/coffees/:id/edit", CoffeeLive.Index, :edit
+
+      live "/coffees/:id", CoffeeLive.Show, :show
+      live "/coffees/:id/show/edit", CoffeeLive.Show, :edit
+    end
   end
 
   # Other scopes may use custom stacks.

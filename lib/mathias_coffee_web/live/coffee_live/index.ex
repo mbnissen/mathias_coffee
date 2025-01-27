@@ -53,6 +53,9 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
       <.header>
         Listing Coffees
         <:actions>
+          <.link href={~p"/"}>
+            <.button>Back to home page</.button>
+          </.link>
           <.link patch={~p"/admin/coffees/new"}>
             <.button>New Coffee</.button>
           </.link>
