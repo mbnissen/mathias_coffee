@@ -32,6 +32,7 @@ defmodule MathiasCoffee.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:sentry, "~> 10.2.0"},
       {:hackney, "~> 1.8"},
       {:styler, "~> 1.2", only: [:dev, :test], runtime: false},

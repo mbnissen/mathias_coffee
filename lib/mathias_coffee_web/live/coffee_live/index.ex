@@ -24,7 +24,7 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Coffee")
-    |> assign(:coffee, %Coffee{})
+    |> assign(:coffee, %Coffee{taste_notes: []})
   end
 
   defp apply_action(socket, :index, _params) do
@@ -41,6 +41,7 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     coffee = Inventory.get_coffee!(id)
+
     {:ok, _} = Inventory.delete_coffee(coffee)
 
     {:noreply, stream_delete(socket, :coffees, coffee)}
@@ -67,6 +68,11 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
           <span>{coffee.variety}</span> <br />
           <span><.flag region={coffee.region} /></span> <br />
           <span>{coffee.process}</span>
+          <div>
+            <%= for taste_note <- coffee.taste_notes do %>
+              <span class="py-1 px-2 rounded-md bg-orange-500 text-xs">{taste_note.name}</span>
+            <% end %>
+          </div>
         </:col>
         <:action :let={{_id, coffee}}>
           <.link patch={~p"/admin/coffees/#{coffee}/edit"}>Edit</.link>
@@ -80,7 +86,6 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
           </.link>
         </:action>
       </.table>
-
       <.modal
         :if={@live_action in [:new, :edit]}
         id="coffee-modal"
