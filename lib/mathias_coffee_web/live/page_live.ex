@@ -44,8 +44,17 @@ defmodule MathiasCoffeeWeb.PageLive do
                     {coffee.variety}
                   </h2>
                   <p class="mt-1 text-zinc-500">
-                    <span><.flag region={coffee.region} /></span> • <span>{coffee.process}</span>
+                    <span><.flag region={coffee.region} /></span>
+                    • <span>{coffee.process}</span>
+                    • <span>{coffee.altitude} masl</span>
                   </p>
+                  <div class="py-2">
+                    <div class="flex flex-wrap gap-2">
+                      <%= for taste_note <- coffee.taste_notes do %>
+                        <.tag>{taste_note.name}</.tag>
+                      <% end %>
+                    </div>
+                  </div>
                   <div class="pt-2 flex justify-between">
                     <div>
                       <p class="text-lg pt-2 font-semibold text-zinc-600">

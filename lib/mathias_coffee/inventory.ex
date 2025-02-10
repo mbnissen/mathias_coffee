@@ -18,7 +18,7 @@ defmodule MathiasCoffee.Inventory do
 
   """
   def list_coffees do
-    Repo.all(Coffee)
+    Coffee |> Repo.all() |> Repo.preload(:taste_notes)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule MathiasCoffee.Inventory do
       ** (Ecto.NoResultsError)
 
   """
-  def get_coffee!(id), do: Repo.get!(Coffee, id)
+  def get_coffee!(id), do: Coffee |> Repo.get!(id) |> Repo.preload(:taste_notes)
 
   @doc """
   Creates a coffee.

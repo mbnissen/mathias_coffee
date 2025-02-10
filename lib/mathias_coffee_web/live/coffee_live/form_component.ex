@@ -23,9 +23,37 @@ defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
         <.input field={@form[:variety]} type="text" label="Variety" />
         <.input field={@form[:region]} type="text" label="Region" />
         <.input field={@form[:process]} type="text" label="Process" />
-        <.input field={@form[:price]} type="number" label="Price" step="any" />
+        <.input field={@form[:price]} type="number" label="Price (kr)" step="any" />
+        <.input field={@form[:altitude]} type="number" label="Altitude (meter)" step="any" />
+        <div class="flex justify-between">
+          <.input
+            phx-change="update_taste_note"
+            label="Taste Note"
+            type="text"
+            name="taste_note"
+            value={@taste_note}
+            phx-target={@myself}
+          />
+          <div
+            class="text-zinc-700 text-xs mt-8 py-3 px-6 border-zinc-600 border rounded-md"
+            phx-target={@myself}
+            phx-click="add_taste_note"
+          >
+            Add
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <%= for taste_note <- @taste_notes do %>
+            <.tag>
+              <span phx-target={@myself} phx-click="remove_taste_note" phx-value-name={taste_note}>
+                {taste_note} ✕
+              </span>
+            </.tag>
+          <% end %>
+        </div>
         <:actions>
-          <.button phx-disable-with="Saving...">Save Coffee</.button>
+          <.button class="w-full" phx-disable-with="Saving...">Save Coffee</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -34,12 +62,36 @@ defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
 
   @impl true
   def update(%{coffee: coffee} = assigns, socket) do
+    dbg(coffee)
+    taste_notes = Enum.map(coffee.taste_notes, & &1.name)
+
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:taste_note, "")
+     |> assign(:taste_notes, taste_notes)
      |> assign_new(:form, fn ->
-       to_form(Inventory.change_coffee(coffee))
+       coffee
+       |> Inventory.change_coffee()
+       |> to_form()
      end)}
+  end
+
+  @impl true
+  def handle_event("update_taste_note", %{"taste_note" => taste_note}, socket) do
+    {:noreply, assign(socket, taste_note: taste_note)}
+  end
+
+  @impl true
+  def handle_event("remove_taste_note", %{"name" => name}, socket) do
+    taste_notes = Enum.filter(socket.assigns.taste_notes, &(&1 != name))
+    {:noreply, assign(socket, taste_notes: taste_notes)}
+  end
+
+  @impl true
+  def handle_event("add_taste_note", _, socket) do
+    taste_notes = socket.assigns.taste_notes ++ [socket.assigns.taste_note]
+    {:noreply, assign(socket, taste_notes: taste_notes)}
   end
 
   @impl true
@@ -52,7 +104,9 @@ defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
     save_coffee(socket, socket.assigns.action, coffee_params)
   end
 
-  defp save_coffee(socket, :edit, coffee_params) do
+  defp save_coffee(socket, :edit, params) do
+    coffee_params = Map.put(params, "taste_notes", socket.assigns.taste_notes)
+
     case Inventory.update_coffee(socket.assigns.coffee, coffee_params) do
       {:ok, coffee} ->
         notify_parent({:saved, coffee})
@@ -67,7 +121,9 @@ defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
     end
   end
 
-  defp save_coffee(socket, :new, coffee_params) do
+  defp save_coffee(socket, :new, params) do
+    coffee_params = Map.put(params, "taste_notes", socket.assigns.taste_notes)
+
     case Inventory.create_coffee(coffee_params) do
       {:ok, coffee} ->
         notify_parent({:saved, coffee})
