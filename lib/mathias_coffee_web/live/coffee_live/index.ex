@@ -68,9 +68,9 @@ defmodule MathiasCoffeeWeb.CoffeeLive.Index do
           <span>{coffee.variety}</span> <br />
           <span><.flag region={coffee.region} /></span> <br />
           <span>{coffee.process}</span>
-          <div>
+          <div class="flex flex-wrap gap-2 pt-4">
             <%= for taste_note <- coffee.taste_notes do %>
-              <span class="py-1 px-2 rounded-md bg-orange-500 text-xs">{taste_note.name}</span>
+              <.tag>{taste_note.name}</.tag>
             <% end %>
           </div>
         </:col>

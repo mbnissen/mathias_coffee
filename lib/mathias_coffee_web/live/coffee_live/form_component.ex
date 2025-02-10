@@ -43,16 +43,13 @@ defmodule MathiasCoffeeWeb.CoffeeLive.FormComponent do
           </div>
         </div>
 
-        <div class="flex gap-x-2">
+        <div class="flex flex-wrap gap-2">
           <%= for taste_note <- @taste_notes do %>
-            <div
-              phx-target={@myself}
-              phx-click="remove_taste_note"
-              phx-value-name={taste_note}
-              class="py-1 px-2 rounded-md bg-orange-400 text-xs text-zinc-800 flex"
-            >
-              {taste_note} x
-            </div>
+            <.tag>
+              <span phx-target={@myself} phx-click="remove_taste_note" phx-value-name={taste_note}>
+                {taste_note} ✕
+              </span>
+            </.tag>
           <% end %>
         </div>
         <:actions>

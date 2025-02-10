@@ -19,6 +19,16 @@ defmodule MathiasCoffeeWeb.CoreComponents do
   alias Phoenix.HTML.FormField
   alias Phoenix.LiveView.JS
 
+  slot :inner_block, required: true
+
+  def tag(assigns) do
+    ~H"""
+    <div class="inline-block px-4 py-1 text-xs font-semibold leading-5 text-white bg-orange-500 rounded-lg">
+      {render_slot(@inner_block)}
+    </div>
+    """
+  end
+
   def price(assigns) do
     ~H"""
     <span class="ordinal tabular-nums">{@amount} kr.</span>
